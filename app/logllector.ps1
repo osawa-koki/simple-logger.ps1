@@ -8,27 +8,6 @@ try {
 	$listener.Start()
 	echo "Server is running at port $LISTENING_PORT."
 
-	function ContentType ($ext)
-	{
-		switch ($ext)
-		{
-			".html" { "text/html" }
-			".js" { "text/javascript" }
-			".css" { "text/css" }
-			".json" { "application/json" }
-			".xml" { "text/xml" }
-			".gif" { "image/gif" }
-			".ico" { "image/x-icon" }
-			".jpg" { "image/jpeg" }
-			".png" { "image/png" }
-			".svg" { "image/svg+xml" }
-			".webp" { "image/webp" }
-			".zip" { "application/zip" }
-			".webp" { "image/webp" }
-			Default { "text/plain" }
-		}
-	}
-
 	while ($true)
 	{
 		$context = $listener.GetContext()
