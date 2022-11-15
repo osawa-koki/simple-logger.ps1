@@ -32,12 +32,27 @@ try {
 	while ($true)
 	{
 		$context = $listener.GetContext()
-    $context.Response.StatusCode = 201
     $request = $context.Request
 
-    echo "Request: $($request.HttpMethod) $($request.RawUrl) $($request.UserHostAddress)"
+    echo "Request: $($request.HttpMethod) $($request.ToString()) $($request.UserHostAddress)"
 
-    $content = [Text.Encoding]::UTF8.GetBytes("CREATED")
+    if ($request.HttpMethod -eq "POST")
+    {
+      $context.Response.StatusCode = 201
+      $content = [Text.Encoding]::UTF8.GetBytes("CREATED")
+
+      [System.IO.Stream] $body = $request.InputStream
+      [System.Text.Encoding] $encoding = [System.Text.Encoding]::UTF8
+      [System.IO.StreamReader] $reader = New-Object System.IO.StreamReader($body, $encoding)
+      $requestBody = $reader.ReadToEnd()
+
+
+      echo "Request body: $requestBody"
+    } else {
+      $context.Response.StatusCode = 405
+      $content = [Text.Encoding]::UTF8.GetBytes("METHOD NOT ALLOWED")
+    }
+
     $stream = $context.Response.OutputStream
     $stream.Write($content, 0, $content.Length)
     $stream.Close()
