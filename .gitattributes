@@ -43,7 +43,7 @@
 *.bash      text
 *.cmd       text eol=crlf
 *.bat       text eol=crlf
-*.ps1       text eol=crlf
+*.ps1       text eol=crlf encoding=utf-16le
 
 *.jpg       -text
 *.jpeg      -text

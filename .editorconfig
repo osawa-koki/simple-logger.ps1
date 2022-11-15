@@ -13,3 +13,9 @@ trim_trailing_whitespace = false
 
 [*.{csproj,vbproj,fsproj,cs,vb,fs}]
 end_of_line = crlf
+
+[*.{bat,cmd}]
+end_of_line = crlf
+
+[*.ps1]
+charset = utf-16le
