@@ -29,7 +29,7 @@ try {
       [System.IO.Stream] $body = $request.InputStream
 
       if ($body -eq $null) {
-        echo "empty body from $($request.UserHostAddress)."
+        Write-Host "empty body from $($request.UserHostAddress)." -ForegroundColor Green
         continue
       }
 
@@ -37,8 +37,7 @@ try {
       [System.IO.StreamReader] $reader = New-Object System.IO.StreamReader($body, $encoding)
       $requestBody = $reader.ReadToEnd()
 
-
-      echo "Request body: $requestBody"
+      Write-Host "Request body: $requestBody"
     } else {
       $context.Response.StatusCode = 405
       $content = [Text.Encoding]::UTF8.GetBytes("METHOD NOT ALLOWED")
