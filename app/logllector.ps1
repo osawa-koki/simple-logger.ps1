@@ -6,7 +6,7 @@ try {
 	$listener = new-object Net.HttpListener
 	$listener.Prefixes.Add("http://+:$LISTENING_PORT/")
 	$listener.Start()
-	echo "Server is running at port $LISTENING_PORT."
+	Write-Host "Server is running at port $LISTENING_PORT."
 
 	while ($true)
 	{
@@ -28,7 +28,7 @@ try {
 
       [System.IO.Stream] $body = $request.InputStream
 
-      if ($body -eq $null) {
+      if ($null -eq $body) {
         Write-Host "empty body from $($request.UserHostAddress)." -ForegroundColor Green
         continue
       }
