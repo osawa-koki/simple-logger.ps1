@@ -21,6 +21,12 @@ try {
       $content = [Text.Encoding]::UTF8.GetBytes("CREATED")
 
       [System.IO.Stream] $body = $request.InputStream
+
+      if ($body -eq $null) {
+        echo "empty body from $($request.UserHostAddress)."
+        continue
+      }
+
       [System.Text.Encoding] $encoding = [System.Text.Encoding]::UTF8
       [System.IO.StreamReader] $reader = New-Object System.IO.StreamReader($body, $encoding)
       $requestBody = $reader.ReadToEnd()
