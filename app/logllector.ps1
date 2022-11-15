@@ -32,29 +32,15 @@ try {
 	while ($true)
 	{
 		$context = $listener.GetContext()
-		$path = $context.Request.Url.AbsolutePath
-		if ($path.EndsWith("/")) {
-			$path += "index.html"
-		}
-		$filepath = join-path (get-location) $path
-		$exists = [IO.File]::Exists($filepath)
-		echo "$($path) --> $($filepath) [$($exists)]"
-		if ($exists) {
-			$extension = [IO.Path]::GetExtension($filepath)
-			$context.Response.ContentType = ContentType($extension)
-			$rstream = [IO.File]::OpenRead($filepath)
-			$stream = $context.Response.OutputStream
-			$rstream.CopyTo($stream)
-			$stream.Close()
-			$rstream.Dispose()
-		} else {
-			$context.Response.ContentType = "text/html"
-			$context.Response.StatusCode = 404
-			$content = [Text.Encoding]::UTF8.GetBytes("File Not Found")
-			$stream = $context.Response.OutputStream
-			$stream.Write($content, 0, $content.Length)
-			$stream.Close()
-		}
+    $context.Response.StatusCode = 201
+    $request = $context.Request
+
+    echo "Request: $($request.HttpMethod) $($request.RawUrl) $($request.UserHostAddress)"
+
+    $content = [Text.Encoding]::UTF8.GetBytes("CREATED")
+    $stream = $context.Response.OutputStream
+    $stream.Write($content, 0, $content.Length)
+    $stream.Close()
 	}
 } catch {
 	Write-Error $_.Exception
