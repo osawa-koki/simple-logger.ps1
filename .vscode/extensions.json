@@ -4,6 +4,7 @@
     "mhutchie.git-graph",
     "github.copilot",
     "eamodio.gitlens",
-    "davidanson.vscode-markdownlint"
+    "davidanson.vscode-markdownlint",
+    "ms-vscode.powershell"
   ]
 }
