@@ -13,7 +13,13 @@ try {
 		$context = $listener.GetContext()
     $request = $context.Request
 
-    echo "Request: $($request.HttpMethod) $($request.RawUrl) $($request.UserHostAddress)"
+    Write-Host "Request: " -NoNewline
+    if ($request.HttpMethod -eq "POST") {
+      Write-Host "POST" -ForegroundColor Red -NoNewline
+    } else {
+      Write-Host "$($request.HttpMethod) " -ForegroundColor Blue -NoNewline
+    }
+    Write-Host "$($request.RawUrl) $($request.UserHostAddress)"
 
     if ($request.HttpMethod -eq "POST")
     {
