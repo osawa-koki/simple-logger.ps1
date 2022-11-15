@@ -6,33 +6,27 @@ class Logger {
   }
   [void] Info($message) {
     $logger = [Logger]::new()
-    $logger.PrintOut("INFO", $message, "green")
+    $logger.PrintOut("INFO", $message, "Green")
   }
   [void] Warn($message) {
     $logger = [Logger]::new()
-    $logger.PrintOut("WARN", $message, "magenta")
+    $logger.PrintOut("WARN", $message, "Magenta")
   }
   [void] Error($message) {
     $logger = [Logger]::new()
-    $logger.PrintOut("ERROR", $message, "magenta")
+    $logger.PrintOut("ERROR", $message, "Magenta")
   }
   [void] Fatal($message) {
     $logger = [Logger]::new()
-    $logger.PrintOut("FATAL", $message, "red")
+    $logger.PrintOut("FATAL", $message, "Red")
   }
   [void] PrintOut($level, $message, $color) {
     $level = ([string]$level).PadLeft(5)
     $logger = [Logger]::new()
     if ($null -eq $color) {
       Write-Host "[$($logger.GetDate())] $level | $message"
-    } elseif ($color -eq "red") {
-      Write-Host "[$($logger.GetDate())] $level | $message" -ForegroundColor Red
-    } elseif ($color -eq "green") {
-      Write-Host "[$($logger.GetDate())] $level | $message" -ForegroundColor Green
-    } elseif ($color -eq "magenta") {
-      Write-Host "[$($logger.GetDate())] $level | $message" -ForegroundColor Magenta
     } else {
-      Write-Host "[$($logger.GetDate())] $level | $message"
+      Write-Host "[$($logger.GetDate())] $level | $message" -ForegroundColor $color
     }
   }
   [string] GetDate() {
