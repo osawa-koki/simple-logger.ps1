@@ -1,10 +1,12 @@
 if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole("Administrators")) { Start-Process powershell.exe "-File `"$PSCommandPath`"" -Verb RunAs; exit }
 
+$LISTENING_PORT = 7777
+
 try {
 	$listener = new-object Net.HttpListener
-	$listener.Prefixes.Add("http://+:7777/")
+	$listener.Prefixes.Add("http://+:$LISTENING_PORT/")
 	$listener.Start()
-	echo "Server is running at port 7777"
+	echo "Server is running at port $LISTENING_PORT."
 
 	function ContentType ($ext)
 	{
