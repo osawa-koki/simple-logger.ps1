@@ -34,7 +34,7 @@ try {
 		$context = $listener.GetContext()
     $request = $context.Request
 
-    echo "Request: $($request.HttpMethod) $($request.ToString()) $($request.UserHostAddress)"
+    echo "Request: $($request.HttpMethod) $($request.RawUrl) $($request.UserHostAddress)"
 
     if ($request.HttpMethod -eq "POST")
     {
